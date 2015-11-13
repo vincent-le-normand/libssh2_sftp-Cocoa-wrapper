@@ -458,7 +458,9 @@ void freeKeychainContent(void *ptr, void *info)
         if (!item) return nil;
         
         NSURLCredential *credential = [NSURLCredential ck2_credentialWithKeychainItem:item user:nil];
-        return [NSDictionary dictionaryWithObject:credential forKey:credential.user];
+		if(credential.user==nil)
+			return nil;
+		return [NSDictionary dictionaryWithObject:credential forKey:credential.user];
     }
     else
     {
