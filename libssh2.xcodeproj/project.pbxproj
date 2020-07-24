@@ -15,7 +15,7 @@
 			);
 			dependencies = (
 				800802FE1667F836004D39F5 /* PBXTargetDependency */,
-				800803001667F836004D39F5 /* PBXTargetDependency */,
+				EE4E83FE24C11DC800324D23 /* PBXTargetDependency */,
 				800803021667F836004D39F5 /* PBXTargetDependency */,
 			);
 			name = libssh2;
@@ -32,18 +32,6 @@
 			name = "libssh2-clean";
 			productName = "libssh2-clean";
 		};
-		800802F31667F73C004D39F5 /* libssh2-i386 */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = 800802F41667F73C004D39F5 /* Build configuration list for PBXAggregateTarget "libssh2-i386" */;
-			buildPhases = (
-				800803041667FB34004D39F5 /* Run Script - Copy, Buildconf, Configure, Make */,
-				8008030616684DFC004D39F5 /* Run Script - Rename + Install Name */,
-			);
-			dependencies = (
-			);
-			name = "libssh2-i386";
-			productName = "libssh2-i386";
-		};
 		800802F71667F74A004D39F5 /* libssh2-x86_64 */ = {
 			isa = PBXAggregateTarget;
 			buildConfigurationList = 800802F81667F74A004D39F5 /* Build configuration list for PBXAggregateTarget "libssh2-x86_64" */;
@@ -56,6 +44,18 @@
 			name = "libssh2-x86_64";
 			productName = "libssh2-x86_64";
 		};
+		EE4E83F724C1186100324D23 /* libssh2-arm64 */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = EE4E83FA24C1186100324D23 /* Build configuration list for PBXAggregateTarget "libssh2-arm64" */;
+			buildPhases = (
+				EE4E83F824C1186100324D23 /* Run Script - Copy, Buildconf, Configure, Make */,
+				EE4E83F924C1186100324D23 /* Run Script - Rename + Install Name */,
+			);
+			dependencies = (
+			);
+			name = "libssh2-arm64";
+			productName = "libssh2-x86_64";
+		};
 /* End PBXAggregateTarget section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,19 +66,19 @@
 			remoteGlobalIDString = 800802EF1667F731004D39F5;
 			remoteInfo = "libssh2-clean";
 		};
-		800802FF1667F836004D39F5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 800802E51667F6D5004D39F5 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 800802F31667F73C004D39F5;
-			remoteInfo = "libssh2-i386";
-		};
 		800803011667F836004D39F5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 800802E51667F6D5004D39F5 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 800802F71667F74A004D39F5;
 			remoteInfo = "libssh2-x86_64";
+		};
+		EE4E83FD24C11DC800324D23 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 800802E51667F6D5004D39F5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EE4E83F724C1186100324D23;
+			remoteInfo = "libssh2-arm64";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -109,6 +109,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 800802E41667F6D5004D39F5;
@@ -117,8 +118,8 @@
 			targets = (
 				800802EB1667F715004D39F5 /* libssh2 */,
 				800802EF1667F731004D39F5 /* libssh2-clean */,
-				800802F31667F73C004D39F5 /* libssh2-i386 */,
 				800802F71667F74A004D39F5 /* libssh2-x86_64 */,
+				EE4E83F724C1186100324D23 /* libssh2-arm64 */,
 			);
 		};
 /* End PBXProject section */
@@ -136,37 +137,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "# glibtoolize (and maybe other tools) are not supplied with OS X.\n# Add default macports & homebrew paths in attempt to find them.\nexport PATH=${PATH}:/opt/local/bin:/usr/local/bin\n\n# Clean original source dir, just in case.\ncd \"${SRCROOT}/libssh2\"\necho \"Please ignore any messages about \\\"No rule to make target distclean.\\\" That just means the build dir is already clean.\"\nmake distclean\n\n# Remove final output files from previous run.\ncd \"${SRCROOT}\"\nrm -f  \"libssh2.dylib\"\nrm -Rf \"libssh2.dylib.dSYM\"\n\n# Remove intermediate output files from previous run.\nrm -f  \"${OBJROOT}/libssh2.dylib\"\nrm -Rf \"${OBJROOT}/libssh2.dylib.dSYM\"\n\n# Remove build dirs from previous run.\nrm -Rf \"${OBJROOT}/libssh2-i386\"\nrm -Rf \"${OBJROOT}/libssh2-x86_64\"\nrm -Rf \"${OBJROOT}/openssl-build-include\"\n";
-			showEnvVarsInLog = 0;
-		};
-		800803041667FB34004D39F5 /* Run Script - Copy, Buildconf, Configure, Make */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Run Script - Copy, Buildconf, Configure, Make";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "# glibtoolize (and maybe other tools) are not supplied with OS X.\n# Add default macports & homebrew paths in attempt to find them.\nexport PATH=${PATH}:/opt/local/bin:/usr/local/bin\n\n# Copy source to a new location to build.\ncd \"${SRCROOT}\"\nmkdir -p \"${OBJROOT}\"\ncp -af libssh2 \"${OBJROOT}/libssh2-i386\"\ncp -Rf openssl-build-include/ \"${OBJROOT}/openssl-build-include/\"\n\n# Buildconf\ncd \"${OBJROOT}/libssh2-i386\"\necho \"Please ignore any messages about \\\"No rule to make target distclean.\\\" That just means the build dir is already clean.\"\nmake distclean\n./buildconf\n\n# Configure\n./configure \\\n  CC=\"clang\" \\\n  CFLAGS=\"-isysroot ${SDKROOT} -I${OBJROOT}/openssl-build-include -arch i386 -g -w -mmacosx-version-min=10.6\" \\\n  LDFLAGS=\"-L${SRCROOT}\" \\\n  --host=i386-apple-darwin10 \\\n  --with-sysroot=${SDKROOT} \\\n  --with-openssl \\\n  --with-libz \\\n  --enable-shared \\\n  --disable-static \\\n  --disable-examples-build\n\n# Make\nmake\n";
-			showEnvVarsInLog = 0;
-		};
-		8008030616684DFC004D39F5 /* Run Script - Rename + Install Name */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Run Script - Rename + Install Name";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "# glibtoolize (and maybe other tools) are not supplied with OS X.\n# Add default macports & homebrew paths in attempt to find them.\nexport PATH=${PATH}:/opt/local/bin:/usr/local/bin\n\n# Rename & remove extraneous files.\ncd \"${OBJROOT}/libssh2-i386/src/.libs\"\ncp -f libssh2.dylib libssh2-i386.dylib\n\n## Preserve .a files name & location. They are needed by dsymutil later.\n## libcrypto.a, libssl.a\n# this may apply to libssh2-symbols.expsym for libssh2\n\n# Correct the install name of the dylibs & add an rpath.\ninstall_name_tool -id @rpath/libssh2.dylib libssh2-i386.dylib\ninstall_name_tool -add_rpath @loader_path/../Frameworks libssh2-i386.dylib\n";
+			shellScript = "# glibtoolize (and maybe other tools) are not supplied with OS X.\n# Add default macports & homebrew paths in attempt to find them.\nexport PATH=${PATH}:/opt/local/bin:/usr/local/bin\n\n# Clean original source dir, just in case.\ncd \"${SRCROOT}/libssh2\"\necho \"Please ignore any messages about \\\"No rule to make target distclean.\\\" That just means the build dir is already clean.\"\nmake distclean\n\n# Remove final output files from previous run.\ncd \"${SRCROOT}\"\nrm -f  \"libssh2.dylib\"\nrm -Rf \"libssh2.dylib.dSYM\"\n\n# Remove intermediate output files from previous run.\nrm -f  \"${OBJROOT}/libssh2.dylib\"\nrm -Rf \"${OBJROOT}/libssh2.dylib.dSYM\"\n\n# Remove build dirs from previous run.\nrm -Rf \"${OBJROOT}/libssh2-arm64\"\nrm -Rf \"${OBJROOT}/libssh2-x86_64\"\nrm -Rf \"${OBJROOT}/openssl-build-include\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8008030716684F71004D39F5 /* Run Script - lipo multi-arch dylib */ = {
@@ -183,7 +154,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "# glibtoolize (and maybe other tools) are not supplied with OS X.\n# Add default macports & homebrew paths in attempt to find them.\nexport PATH=${PATH}:/opt/local/bin:/usr/local/bin\n\n# Create final dylibs.\ncd \"${OBJROOT}\"\nlipo -create \\\n  -arch i386 libssh2-i386/src/.libs/libssh2-i386.dylib \\\n  -arch x86_64 libssh2-x86_64/src/.libs/libssh2-x86_64.dylib \\\n  -output libssh2.dylib\n\n# Create dSYMs\n# NOTE: dsymutil depends on the following files still being in the same place and having the same name:\n#   openssl-i386/libcrypto.a, openssl-i386/libssl.a, openssl-x86_64/libcrypto.a, openssl-x86_64/libssl.a\ndsymutil libssh2.dylib\n\n# Strip dylibs\nstrip -x libssh2.dylib\n\n# Final output to project dir, not source/build dir.\ncp -f  libssh2.dylib      \"${SRCROOT}\"\ncp -Rf libssh2.dylib.dSYM \"${SRCROOT}\"\n\n# Remove build dirs.\n#rm -Rf \"${OBJROOT}/libssh2-i386\"\n#rm -Rf \"${OBJROOT}/libssh2-x86_64\"\n";
+			shellScript = "# glibtoolize (and maybe other tools) are not supplied with OS X.\n# Add default macports & homebrew paths in attempt to find them.\nexport PATH=${PATH}:/opt/local/bin:/usr/local/bin\n\n# Create final dylibs.\ncd \"${OBJROOT}\"\nlipo -create \\\n  -arch arm64 libssh2-arm64/src/.libs/libssh2-arm64.dylib \\\n  -arch x86_64 libssh2-x86_64/src/.libs/libssh2-x86_64.dylib \\\n  -output libssh2.dylib\n\n# Create dSYMs\n# NOTE: dsymutil depends on the following files still being in the same place and having the same name:\n#   openssl-arm64/libcrypto.a, openssl-arm64/libssl.a, openssl-x86_64/libcrypto.a, openssl-x86_64/libssl.a\ndsymutil libssh2.dylib\n\n# Strip dylibs\nstrip -x libssh2.dylib\n\n# Final output to project dir, not source/build dir.\ncp -f  libssh2.dylib      \"${SRCROOT}\"\ncp -Rf libssh2.dylib.dSYM \"${SRCROOT}\"\n\n# Remove build dirs.\n#rm -Rf \"${OBJROOT}/libssh2-arm64\"\n#rm -Rf \"${OBJROOT}/libssh2-x86_64\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8008030816685155004D39F5 /* Run Script - Copy, Buildconf, Configure, Make */ = {
@@ -216,6 +187,36 @@
 			shellScript = "# glibtoolize (and maybe other tools) are not supplied with OS X.\n# Add default macports & homebrew paths in attempt to find them.\nexport PATH=${PATH}:/opt/local/bin:/usr/local/bin\n\n# Rename & remove extraneous files.\ncd \"${OBJROOT}/libssh2-x86_64/src/.libs\"\ncp -f libssh2.dylib libssh2-x86_64.dylib\n\n## Preserve .a files name & location. They are needed by dsymutil later.\n## libcrypto.a, libssl.a\n# this may apply to libssh2-symbols.expsym for libssh2\n\n# Correct the install name of the dylibs and add an rpath.\ninstall_name_tool -id @rpath/libssh2.dylib libssh2-x86_64.dylib\ninstall_name_tool -add_rpath @loader_path/../Frameworks libssh2-x86_64.dylib\n";
 			showEnvVarsInLog = 0;
 		};
+		EE4E83F824C1186100324D23 /* Run Script - Copy, Buildconf, Configure, Make */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script - Copy, Buildconf, Configure, Make";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "# glibtoolize (and maybe other tools) are not supplied with OS X.\n# Add default macports & homebrew paths in attempt to find them.\nexport PATH=${PATH}:/opt/local/bin:/usr/local/bin\n\n# Copy source to a new location to build.\ncd \"${SRCROOT}\"\nmkdir -p \"${OBJROOT}\"\ncp -af libssh2 \"${OBJROOT}/libssh2-arm64\"\ncp -Rf openssl-build-include/ \"${OBJROOT}/openssl-build-include/\"\n\n# Buildconf\ncd \"${OBJROOT}/libssh2-arm64\"\necho \"Please ignore any messages about \\\"No rule to make target distclean.\\\" That just means the build dir is already clean.\"\nmake distclean\n./buildconf\n\n# Configure\n./configure \\\nCC=\"clang\" \\\nCFLAGS=\"-isysroot ${SDKROOT} -I${OBJROOT}/openssl-build-include -arch arm64 -g -w -mmacosx-version-min=10.13\" \\\nLDFLAGS=\"-L${SRCROOT}\" \\\n--host=arm-apple-darwin10 \\\n--with-sysroot=${SDKROOT} \\\n--with-openssl \\\n--with-libz \\\n--enable-shared \\\n--disable-static \\\n--disable-examples-build\n\n# Make\nmake\n";
+			showEnvVarsInLog = 0;
+		};
+		EE4E83F924C1186100324D23 /* Run Script - Rename + Install Name */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script - Rename + Install Name";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "# glibtoolize (and maybe other tools) are not supplied with OS X.\n# Add default macports & homebrew paths in attempt to find them.\nexport PATH=${PATH}:/opt/local/bin:/usr/local/bin\n\n# Rename & remove extraneous files.\ncd \"${OBJROOT}/libssh2-arm64/src/.libs\"\ncp -f libssh2.dylib libssh2-arm64.dylib\n\n## Preserve .a files name & location. They are needed by dsymutil later.\n## libcrypto.a, libssl.a\n# this may apply to libssh2-symbols.expsym for libssh2\n\n# Correct the install name of the dylibs and add an rpath.\ninstall_name_tool -id @rpath/libssh2.dylib libssh2-arm64.dylib\ninstall_name_tool -add_rpath @loader_path/../Frameworks libssh2-arm64.dylib\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -224,15 +225,15 @@
 			target = 800802EF1667F731004D39F5 /* libssh2-clean */;
 			targetProxy = 800802FD1667F836004D39F5 /* PBXContainerItemProxy */;
 		};
-		800803001667F836004D39F5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 800802F31667F73C004D39F5 /* libssh2-i386 */;
-			targetProxy = 800802FF1667F836004D39F5 /* PBXContainerItemProxy */;
-		};
 		800803021667F836004D39F5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 800802F71667F74A004D39F5 /* libssh2-x86_64 */;
 			targetProxy = 800803011667F836004D39F5 /* PBXContainerItemProxy */;
+		};
+		EE4E83FE24C11DC800324D23 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EE4E83F724C1186100324D23 /* libssh2-arm64 */;
+			targetProxy = EE4E83FD24C11DC800324D23 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -240,9 +241,9 @@
 		800802E91667F6D5004D39F5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -250,9 +251,9 @@
 		800802EA1667F6D5004D39F5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -285,28 +286,10 @@
 			};
 			name = Release;
 		};
-		800802F51667F73C004D39F5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				VALID_ARCHS = i386;
-			};
-			name = Debug;
-		};
-		800802F61667F73C004D39F5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				VALID_ARCHS = i386;
-			};
-			name = Release;
-		};
 		800802F91667F74A004D39F5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = x86_64;
 			};
@@ -315,9 +298,27 @@
 		800802FA1667F74A004D39F5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = x86_64;
+			};
+			name = Release;
+		};
+		EE4E83FB24C1186100324D23 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = arm64;
+			};
+			name = Debug;
+		};
+		EE4E83FC24C1186100324D23 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = arm64;
 			};
 			name = Release;
 		};
@@ -351,20 +352,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		800802F41667F73C004D39F5 /* Build configuration list for PBXAggregateTarget "libssh2-i386" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				800802F51667F73C004D39F5 /* Debug */,
-				800802F61667F73C004D39F5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		800802F81667F74A004D39F5 /* Build configuration list for PBXAggregateTarget "libssh2-x86_64" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				800802F91667F74A004D39F5 /* Debug */,
 				800802FA1667F74A004D39F5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EE4E83FA24C1186100324D23 /* Build configuration list for PBXAggregateTarget "libssh2-arm64" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EE4E83FB24C1186100324D23 /* Debug */,
+				EE4E83FC24C1186100324D23 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
