@@ -2,5 +2,6 @@
 	path = libssh2
 	url = https://github.com/karelia/libssh2.git
 [submodule "openssl"]
+	branch = noodlesoft
 	path = openssl
 	url = git@github.com:Noodlesoft/openssl.git
