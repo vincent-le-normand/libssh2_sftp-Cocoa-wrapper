@@ -3,4 +3,4 @@
 	url = https://github.com/karelia/libssh2.git
 [submodule "openssl"]
 	path = openssl
-	url = https://github.com/karelia/openssl.git
+	url = git@github.com:Noodlesoft/openssl.git
