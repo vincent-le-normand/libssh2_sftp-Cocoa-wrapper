@@ -27,7 +27,7 @@
 			);
 			dependencies = (
 				809AE1C51602BF8A001D02E1 /* PBXTargetDependency */,
-				EE067CFB24CB905600DB7967 /* PBXTargetDependency */,
+				EE067D0124CB94A200DB7967 /* PBXTargetDependency */,
 				800802DE1666FAF7004D39F5 /* PBXTargetDependency */,
 			);
 			name = openssl;
@@ -73,7 +73,7 @@
 			remoteGlobalIDString = 809AE1BF1602BEF1001D02E1;
 			remoteInfo = "libcurl-clean";
 		};
-		EE067CFA24CB905600DB7967 /* PBXContainerItemProxy */ = {
+		EE067D0024CB94A200DB7967 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
 			proxyType = 1;
@@ -173,7 +173,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "# Include default paths for MacPorts & HomeBrew.\nexport PATH=${PATH}:/opt/local/bin:/usr/local/bin\n\n# Create final dylibs.\ncd \"${OBJROOT}\"\nlipo -create -arch arm64 openssl-arm64/libcrypto-arm64.dylib  -arch x86_64 openssl-x86_64/libcrypto-x86_64.dylib  -output libcrypto.dylib\nlipo -create -arch arm64 openssl-arm64/libssl-arm64.dylib     -arch x86_64 openssl-x86_64/libssl-x86_64.dylib     -output libssl.dylib\n\n# Create dSYMs\n# NOTE: dsymutil depends on the following files still being in the same place and having the same name:\n#   openssl-arm64/libcrypto.a, openssl-arm64/libssl.a, openssl-x86_64/libcrypto.a, openssl-x86_64/libssl.a\ndsymutil libcrypto.dylib\ndsymutil libssl.dylib\n\n# Strip dylibs\nstrip -x libcrypto.dylib\nstrip -x libssl.dylib\n\n# Final output to project dir, not source/build dir.\ncp -f  libcrypto.dylib      \"${SRCROOT}\"\ncp -Rf libcrypto.dylib.dSYM \"${SRCROOT}\"\ncp -f  libssl.dylib         \"${SRCROOT}\"\ncp -Rf libssl.dylib.dSYM    \"${SRCROOT}\"\n# Note that include dir is exactly the same for both arm64 and X86_64, no need for both.\ncp -RfL openssl-x86_64/include/ \"${SRCROOT}/openssl-build-include/\"\n\n# Remove build dirs.\n#rm -Rf \"${OBJROOT}/openssl-arm64\"\n#rm -Rf \"${OBJROOT}/openssl-x86_64\"\n";
+			shellScript = "# Include default paths for MacPorts & HomeBrew.\nexport PATH=${PATH}:/opt/local/bin:/usr/local/bin\n\n# Create final dylibs.\ncd \"${OBJROOT}\"\npwd\nlipo -create -arch arm64 openssl-arm64/libcrypto-arm64.dylib  -arch x86_64 openssl-x86_64/libcrypto-x86_64.dylib  -output libcrypto.dylib\nlipo -create -arch arm64 openssl-arm64/libssl-arm64.dylib     -arch x86_64 openssl-x86_64/libssl-x86_64.dylib     -output libssl.dylib\n\n# Create dSYMs\n# NOTE: dsymutil depends on the following files still being in the same place and having the same name:\n#   openssl-arm64/libcrypto.a, openssl-arm64/libssl.a, openssl-x86_64/libcrypto.a, openssl-x86_64/libssl.a\ndsymutil libcrypto.dylib\ndsymutil libssl.dylib\n\n# Strip dylibs\nstrip -x libcrypto.dylib\nstrip -x libssl.dylib\n\n# Final output to project dir, not source/build dir.\ncp -f  libcrypto.dylib      \"${SRCROOT}\"\ncp -Rf libcrypto.dylib.dSYM \"${SRCROOT}\"\ncp -f  libssl.dylib         \"${SRCROOT}\"\ncp -Rf libssl.dylib.dSYM    \"${SRCROOT}\"\n# Note that include dir is exactly the same for both arm64 and X86_64, no need for both.\ncp -RfL openssl-x86_64/include/ \"${SRCROOT}/openssl-build-include/\"\n\n# Remove build dirs.\n#rm -Rf \"${OBJROOT}/openssl-arm64\"\n#rm -Rf \"${OBJROOT}/openssl-x86_64\"\n";
 			showEnvVarsInLog = 0;
 		};
 		809AE1C31602BEF5001D02E1 /* Run Script - remove previous product dylibs */ = {
@@ -234,10 +234,10 @@
 			target = 809AE1BF1602BEF1001D02E1 /* openssl-clean */;
 			targetProxy = 809AE1C41602BF8A001D02E1 /* PBXContainerItemProxy */;
 		};
-		EE067CFB24CB905600DB7967 /* PBXTargetDependency */ = {
+		EE067D0124CB94A200DB7967 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = EE4E83F124C10E6600324D23 /* openssl-arm64 */;
-			targetProxy = EE067CFA24CB905600DB7967 /* PBXContainerItemProxy */;
+			targetProxy = EE067D0024CB94A200DB7967 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
