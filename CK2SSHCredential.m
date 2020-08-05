@@ -396,7 +396,7 @@ void freeKeychainContent(void *ptr, void *info)
         if (item) {
             OSStatus err = SecKeychainItemDelete(item);
             if (err != noErr) {
-                NSLog(@"Problem deleting ssh key passphrase from keychain: %s", GetMacOSStatusErrorString(err));
+                NSLog(@"Problem deleting ssh key passphrase from keychain: %i", err);
             }
             result = (err == noErr);
         }
