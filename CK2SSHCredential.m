@@ -313,8 +313,8 @@ void freeKeychainContent(void *ptr, void *info)
 
 - (SecKeychainItemRef)copyKeychainItemForPrivateKeyURL:(NSURL *)privateKeyURL;
 {
-	NSString *service = [self ck2_SSHServiceNameForKeyAtURL:privateKeyURL];
-	
+    NSString *service = @"SSH";
+    
     SecKeychainItemRef result;
     OSStatus status = SecKeychainFindGenericPassword(NULL,
                                                      (UInt32) [service lengthOfBytesUsingEncoding:NSUTF8StringEncoding], [service UTF8String],
@@ -325,16 +325,13 @@ void freeKeychainContent(void *ptr, void *info)
     return (status == errSecSuccess ? result : NULL);
 }
 
-- (NSString *)ck2_SSHServiceNameForKeyAtURL:(NSURL *)privateKey {
-	return [NSString stringWithFormat:@"Sandvox SSH key passphrase: %@", privateKey.lastPathComponent];
-}
-
 - (NSURLCredential *)ck2_credentialForPrivateKeyAtURL:(NSURL *)privateKey user:(NSString *)user;
 {
     // Try fetching passphrase from the keychain
-    // The service & account name is entirely empirical based on what's in my keychain
-	
+    // The service & account name is entirely empirical based on what's in my keychain from SSH Agent
+    
     SecKeychainItemRef item = [self copyKeychainItemForPrivateKeyURL:privateKey];
+
     if (!item) return nil;
     
     CK2SSHCredential *result = [[CK2SSHCredential alloc] initWithUser:user keychainItem:item];
@@ -356,7 +353,7 @@ void freeKeychainContent(void *ptr, void *info)
     if (privateKeyURL && password)
     {
         // Time to store the passphrase
-        NSString *service = [self ck2_SSHServiceNameForKeyAtURL:[credential ck2_privateKeyURL]];
+        NSString *service = @"SSH";
         
         SecKeychainItemRef item = [self copyKeychainItemForPrivateKeyURL:privateKeyURL];
         
@@ -396,7 +393,7 @@ void freeKeychainContent(void *ptr, void *info)
         if (item) {
             OSStatus err = SecKeychainItemDelete(item);
             if (err != noErr) {
-                NSLog(@"Problem deleting ssh key passphrase from keychain: %i", err);
+                NSLog(@"Problem deleting ssh key passphrase from keychain: %s", GetMacOSStatusErrorString(err));
             }
             result = (err == noErr);
         }
@@ -482,9 +479,7 @@ void freeKeychainContent(void *ptr, void *info)
         if (!item) return nil;
         
         NSURLCredential *credential = [NSURLCredential ck2_credentialWithKeychainItem:item user:nil];
-		if(credential.user==nil)
-			return nil;
-		return [NSDictionary dictionaryWithObject:credential forKey:credential.user];
+        return [NSDictionary dictionaryWithObject:credential forKey:credential.user];
     }
     else
     {
